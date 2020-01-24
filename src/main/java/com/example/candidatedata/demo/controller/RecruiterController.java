@@ -32,7 +32,7 @@ public class RecruiterController {
         return recruiterService.createRecruiter(recruiter);
     }
 
-    //put
+//    put
     @PutMapping("/recruiters/{recruiterId}")
     public Optional<Recruiter> updateRecruiter(@PathVariable Long recruiterId,@Valid @RequestBody Recruiter recruiter){
         return recruiterService.updateRecruiter(recruiterId,recruiter);

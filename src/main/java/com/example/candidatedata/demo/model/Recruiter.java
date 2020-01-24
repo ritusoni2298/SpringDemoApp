@@ -8,57 +8,68 @@ import java.util.HashSet;
 
 @Entity
 @Table(name="recruiters")
-public class Recruiter {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Recruiter extends Employee{
+        public Recruiter(){
+        }
+//    @OneToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "employee_id", nullable = false)
+//    private Employee employee;
+//
+//    public Employee getEmployee() {
+//        return employee;
+//    }
+//
+//    public void setE(Employee employee) {
+//        this.employee = employee;
+//    }
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
-    private String firstName;
+    //    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+//
+//    @NotNull
+//    @NotEmpty
+//    @NotBlank
+//    private String firstName;
+//
+//    @NotNull
+//    @NotEmpty
+//    @NotBlank
+//    private String LastName;
+//
+//    @Column(unique = true)
+//    private String email;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
-    private String LastName;
 
-    @Column(unique = true)
-    private String email;
-
-    public Recruiter(){
-
-    }
-
-    public Recruiter(@NotNull @NotEmpty @NotBlank String firstName, @NotNull @NotEmpty @NotBlank String lastName, String email) {
-        this.firstName = firstName;
-        LastName = lastName;
-        this.email = email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return LastName;
-    }
-
-    public void setLastName(String lastName) {
-        LastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+//    public Recruiter(@NotNull @NotEmpty @NotBlank String firstName, @NotNull @NotEmpty @NotBlank String lastName, String email) {
+//        this.firstName = firstName;
+//        LastName = lastName;
+//        this.email = email;
+//    }
+//
+//    public String getFirstName() {
+//        return firstName;
+//    }
+//
+//    public void setFirstName(String firstName) {
+//        this.firstName = firstName;
+//    }
+//
+//    public String getLastName() {
+//        return LastName;
+//    }
+//
+//    public void setLastName(String lastName) {
+//        LastName = lastName;
+//    }
+//
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "candidate")
 //    Set<Candidate> candidates=new HashSet<>(); ==> if we want candidates data when recruiter is fetched
 

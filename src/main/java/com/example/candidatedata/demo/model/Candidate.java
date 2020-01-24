@@ -19,13 +19,7 @@ import java.util.Date;
 //        @UniqueConstraint(columnNames = {"email"})
 ////            @UniqueConstraint(columnNames = {"candidate_id"})
 //    })
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(
-        value={"createdAt","updatedAt"},
-        allowGetters = true
-)
-
-public class Candidate implements Serializable {
+public class Candidate extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -50,29 +44,17 @@ public class Candidate implements Serializable {
 
     private String phoneno;
 
-    @Column(nullable = false,updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date createAt;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date updatedAt;
-
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name="candidate_id",nullable = false)
     @JsonIgnore
     private Recruiter recruiter;
 
-    public Candidate(@NotBlank @NotEmpty String firstName, @NotBlank @NotEmpty String lastName, @NotBlank @NotEmpty String email, String reference, String phoneno, Date createAt, Date updatedAt, Recruiter recruiter) {
+    public Candidate(@NotBlank @NotEmpty String firstName, @NotBlank @NotEmpty String lastName, @NotBlank @NotEmpty String email, String reference, String phoneno, Recruiter recruiter) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.reference = reference;
         this.phoneno = phoneno;
-        this.createAt = createAt;
-        this.updatedAt = updatedAt;
         this.recruiter = recruiter;
     }
 
@@ -119,21 +101,7 @@ public class Candidate implements Serializable {
         this.phoneno = phoneno;
     }
 
-    public Date getCreateAt() {
-        return createAt;
-    }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
     public Recruiter getRecruiter() {
         return recruiter;
