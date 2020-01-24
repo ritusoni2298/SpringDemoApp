@@ -14,11 +14,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name="candidates",
-    uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"email"}),
-            @UniqueConstraint(columnNames = {"candidate_id"})
-    })
+@Table(name="candidates")
+//    uniqueConstraints = {
+//        @UniqueConstraint(columnNames = {"email"})
+////            @UniqueConstraint(columnNames = {"candidate_id"})
+//    })
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(
         value={"createdAt","updatedAt"},
@@ -43,6 +43,7 @@ public class Candidate implements Serializable {
     @NotBlank
     @NotNull
     @NotEmpty
+    @Column(unique = true)
     private String email;
 
     private String reference;
@@ -59,7 +60,7 @@ public class Candidate implements Serializable {
     @LastModifiedDate
     private Date updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name="candidate_id",nullable = false)
     @JsonIgnore
     private Recruiter recruiter;
