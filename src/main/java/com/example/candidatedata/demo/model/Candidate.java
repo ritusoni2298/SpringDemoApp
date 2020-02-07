@@ -47,15 +47,16 @@ public class Candidate extends AuditModel {
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name="candidate_id",nullable = false)
     @JsonIgnore
-    private Recruiter recruiter;
+    private Employee employee;
 
-    public Candidate(@NotBlank @NotEmpty String firstName, @NotBlank @NotEmpty String lastName, @NotBlank @NotEmpty String email, String reference, String phoneno, Recruiter recruiter) {
+    public Candidate(@NotBlank @NotEmpty String firstName, @NotBlank @NotEmpty String lastName, @NotBlank @NotEmpty String email, String reference, String phoneno, Employee employee) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.reference = reference;
         this.phoneno = phoneno;
-        this.recruiter = recruiter;
+//        this.recruiter = recruiter;
+        this.employee=employee;
     }
 
     public Candidate(){

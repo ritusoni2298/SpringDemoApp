@@ -28,8 +28,8 @@ public class RecruiterService {
 
     public Optional<Recruiter> updateRecruiter(@PathVariable Long recruiterId, @Valid @RequestBody Recruiter recruiter){
         return recruiterRepository.findById(recruiterId).map(recruiterr-> {
-            recruiterr.setFirstName(recruiter.getFirstName());
-            recruiterr.setLastName(recruiter.getLastName());
+            recruiterr.setName(recruiter.getName());
+//            recruiterr.setLastName(recruiter.getLastName());
             recruiterr.setEmail(recruiter.getEmail());
             return recruiterRepository.save(recruiterr);
         });

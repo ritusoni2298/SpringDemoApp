@@ -1,9 +1,13 @@
 package com.example.candidatedata.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="employees")
@@ -12,34 +16,64 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @NotBlank
-    @NotEmpty
-    private String firstName;
 
     @NotNull
     @NotBlank
     @NotEmpty
-    private String lastName;
+    private String name;
 
     @NotNull
     @Column(unique = true)
     private String email;
 
-    public String getFirstName() {
-        return firstName;
+    @NotBlank
+    private String password;
+
+    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+    @JoinTable(name = "employee_roles",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JsonIgnore
+    private Set<Role> roles = new HashSet<>();
+
+    public Employee(@NotNull @NotBlank @NotEmpty String name, @NotNull String email, @NotBlank String password) {
+
+        this.name = name;
+        this.email = email;
+        this.password = password;
+
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public Long getId() {
+        return id;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -50,11 +84,7 @@ public class Employee {
         this.email = email;
     }
 
-    public Employee(@NotNull @NotBlank @NotEmpty String firstName, @NotNull @NotBlank @NotEmpty String lastName, @NotNull String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
+
 
     public Employee() {
     }
