@@ -102,13 +102,19 @@ public class Candidate extends AuditModel {
         this.phoneno = phoneno;
     }
 
-
-
-    public Recruiter getRecruiter() {
-        return recruiter;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setRecruiter(Recruiter recruiter) {
-        this.recruiter = recruiter;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
